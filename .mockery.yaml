@@ -1,0 +1,10 @@
+with-expecter: True
+resolve-type-alias: False
+issue-845-fix: True
+dir: "mocks"
+outpkg: "mocks"
+packages:
+    job_executors/cmd/job_management_api/apis:
+        interfaces:
+          IJobRepo:
+          ITaskRepo:

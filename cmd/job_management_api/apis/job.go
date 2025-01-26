@@ -12,7 +12,7 @@ import (
 type IJobRepo interface {
 	CreateJob(ctx context.Context, req model.JobCreateRequest) (*pgdb.Jobs, error)
 	GetJob(ctx context.Context, id string) (*pgdb.Jobs, error)
-	ListJobs(ctx context.Context) ([]pgdb.JobState, error)
+	ListJobs(ctx context.Context) ([]pgdb.Jobs, error)
 	ListJobsByState(ctx context.Context, jobState pgdb.JobState) ([]pgdb.Jobs, error)
 	UpdateJob(ctx context.Context, req model.JobUpdateRequest) (*pgdb.Jobs, error)
 	DeleteJob(ctx context.Context, id string) error
@@ -34,11 +34,11 @@ func NewJobAPI(jobRepo IJobRepo, taskRepo ITaskRepo) *JobAPI {
 }
 
 func (a *JobAPI) Setup(g echo.Group) {
-	g.GET("/job", a.listJobs)
-	g.POST("/job/create", a.createJob)
-	g.POST("/job/update", a.updateJob)
-	g.POST("/task/update", a.updateTask)
-	g.DELETE("/job/:id", a.deleteJob)
+	g.GET("/jobs", a.listJobs)
+	g.POST("/jobs/create", a.createJob)
+	g.POST("/jobs/update", a.updateJob)
+	g.POST("/tasks/update", a.updateTask)
+	g.DELETE("/jobs/:id", a.deleteJob)
 }
 
 func (a *JobAPI) listJobs(c echo.Context) error {
